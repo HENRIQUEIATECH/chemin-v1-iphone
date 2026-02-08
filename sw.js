@@ -1,20 +1,45 @@
-const cacheName = 'corniche-v1';
-const assets = ['./', './index.html'];
+// sw.js
+const CACHE_NAME = 'chemin-v3'; 
+const ASSETS_TO_CACHE = [
+    'chemin-v1-a234e6789-55.html', // Sua página principal
+    'offline.html',
+    'logo.png',
+    'ahistory.html',
+    'acolection.html'
+];
 
-// Instala o service worker e guarda os arquivos no cache
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(cacheName).then(cache => {
-      cache.addAll(assets);
-    })
-  );
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            console.log('CDLC: Guardando arquivos para uso offline...');
+            return cache.addAll(ASSETS_TO_CACHE);
+        })
+    );
 });
 
-// Faz o app funcionar offline
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(res => {
-      return res || fetch(e.request);
-    })
-  );
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cache) => {
+                    if (cache !== CACHE_NAME) {
+                        return caches.delete(cache);
+                    }
+                })
+            );
+        })
+    );
+});
+
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        fetch(event.request).catch(() => {
+            return caches.match(event.request).then((response) => {
+                if (response) return response;
+                if (event.request.mode === 'navigate') {
+                    return caches.match('offline.html');
+                }
+            });
+        })
+    );
 });
