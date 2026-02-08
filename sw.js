@@ -1,5 +1,5 @@
 // sw.js
-const CACHE_NAME = 'chemin-v3'; 
+const CACHE_NAME = 'chemin-v66'; 
 const ASSETS_TO_CACHE = [
     'chemin-v1-a234e6789-66.html', // Sua página principal
     'offline.html',
