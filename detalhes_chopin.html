@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;600&display=swap');
+        
+        body { 
+            background: transparent; 
+            font-family: 'Inter', sans-serif; 
+            color: #1A3C2F; 
+            margin: 0; 
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* Botão Voltar */
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b08d3e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .album-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .album-cover {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
+        .album-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin: 0;
+            color: #1A3C2F;
+        }
+
+        .album-info p {
+            font-size: 12px;
+            color: #b08d3e;
+            margin: 5px 0 0 0;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(176, 141, 62, 0.2);
+        }
+
+        /* Playlist Interna do Álbum */
+        .track-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .track-item {
+            background: rgba(255,255,255,0.6);
+            padding: 12px 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(0,0,0,0.03);
+            font-size: 13px;
+        }
+
+        .track-item:hover {
+            background: #fff;
+            border-color: #b08d3e;
+            transform: translateX(5px);
+        }
+
+        .track-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 11px;
+            color: #b08d3e;
+            margin-right: 10px;
+        }
+
+        .play-icon {
+            color: #036306;
+            font-size: 12px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <a href="acolection.html" class="btn-back">← Zurück zur Sammlung</a>
+
+    <div class="album-header">
+        <img src="s-album-02.png" class="album-cover" alt="Chopin">
+        <div class="album-info">
+            <h1>Nocturnes</h1>
+            <p>Frédéric Chopin</p>
+        </div>
+    </div>
+
+    <div class="description">
+        Die Nocturnes sind Juwelen der Klaviermusik, in denen Chopin die Grenzen von Emotion und Technik verschmilzt. Diese nächtlichen Stücke sind geprägt von melancholischer Schönheit und einer poetischen Tiefe, die den Hörer in eine Welt der Träume und Reflexion entführt.
+    </div>
+
+    <div class="track-list">
+        <div class="track-item" onclick="tocarObra('https://dn721606.ca.archive.org/0/items/complete_chopin_nocturnes_202507/Chopin_Nocturne_No.01_em_Op.72_1_SDRodrian.mp3', 'Nocturne No.01 em Op.72 1 SDRodrian', 'Chopin')">
+            <div><span class="track-number">01</span> Nocturne No.01 em Op.72 1</div>
+            <span class="play-icon">▶</span>
+        </div>
+
+        <div class="track-item" onclick="tocarObra('https://dn721606.ca.archive.org/0/items/complete_chopin_nocturnes_202507/Chopin_Nocturne_No.02_in_c_sharp_minor_SDRodrian.mp3', 'Nocturne No.02 in c sharp minor SDRodrian', 'Chopin')">
+            <div><span class="track-number">02</span> Nocturne No.02 in c sharp minor</div>
+            <span class="play-icon">▶</span>
+        </div>
+
+        <div class="track-item" onclick="tocarObra('https://dn721606.ca.archive.org/0/items/complete_chopin_nocturnes_202507/Chopin_Nocturne_No.03_in_bfm_Op.9_1_SDRodrian.mp3', 'Nocturne No.03 in bfm Op.9 1 SDRodrian', 'Chopin')">
+            <div><span class="track-number">03</span> Nocturne No.03 in bfm Op.9 1</div>
+            <span class="play-icon">▶</span>
+        </div>
+
+        <div class="track-item" onclick="tocarObra('https://dn721606.ca.archive.org/0/items/complete_chopin_nocturnes_202507/Chopin_Nocturne_No.04_in_EfM_Op.9_2_SDRodrian.mp3', 'Nocturne No.04 in EfM Op.9 2 SDRodrian', 'Chopin')">
+            <div><span class="track-number">04</span> Nocturne No.04 in EfM Op.9 2</div>
+            <span class="play-icon">▶</span>
+        </div>
+    </div>
+
+    <script>
+        function tocarObra(url, nome, artista) {
+            if (window.parent) {
+                window.parent.postMessage({
+                    tipo: 'tocar',
+                    url: url,
+                    nome: nome,
+                    artista: artista,
+                    capa: 's-album-02.png' 
+                }, '*');
+            }
+        }
+    </script>
+</body>
+</html>
