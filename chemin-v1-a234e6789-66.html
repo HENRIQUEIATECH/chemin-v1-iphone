@@ -8,46 +8,82 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Chemin">
-    
+    <link rel="apple-touch-icon" href="logo.png">  
+  
     <script src="https://cdn.tailwindcss.com"></script>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto+Mono:wght@400&display=swap');
-    
-    body { 
-        background: #F8FAF9; 
-        margin: 0; 
-        display: flex; 
-        justify-content: center; 
-        min-height: 100vh; 
-        -webkit-font-smoothing: antialiased; 
-        font-family: 'Inter', sans-serif; 
-    }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto+Mono:wght@400&display=swap');
+        
+        body { 
+            background: #F8FAF9; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh; 
+            -webkit-font-smoothing: antialiased; 
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; 
+        }
 
-    /* Removemos a borda e deixamos o container ocupar a tela toda no mobile */
-    .phone-container {
-        width: 100%; 
-        max-width: 500px; /* Um pouco mais largo para tablets e notebooks */
-        height: 100vh; 
-        background: #FFFFFF;
-        display: flex; 
-        flex-direction: column; 
-        position: relative;
-        box-shadow: 0 0 50px rgba(0,0,0,0.1); /* Sombra suave nas laterais */
-    }
+        .phone-container {
+            width: 100%; 
+            max-width: 500px; 
+            height: 100vh; 
+            background: #FFFFFF;
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+        }
 
-    header { 
-        background: linear-gradient(180deg, #F0F4F2 0%, #FFFFFF 100%); 
-        padding-top: env(safe-area-inset-top, 20px); /* Suporte para o notch do iPhone */
-        height: 90px; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        gap: 12px; 
-        border-bottom: 1px solid rgba(176, 141, 62, 0.15);
-    }
+        header { 
+            /* O efeito Pérola Esverdeado */
+            background: linear-gradient(180deg, #F0F4F2 0%, #FFFFFF 100%); 
+            /* Ajuste crucial para o "Notch" do iPhone no modo App */
+            padding-top: env(safe-area-inset-top, 20px); 
+            height: calc(80px + env(safe-area-inset-top, 0px)); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px; 
+            border-bottom: 1px solid rgba(176, 141, 62, 0.15);
+        }
 
-    /* ... Mantenha os estilos de .play-btn e .menu-item que já funcionam ... */
-</style>
+        header h1 {
+            color: #1A3C2F;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .play-btn { 
+            width: 70px; height: 70px; 
+            background: #036306; 
+            border-radius: 50%; 
+            border: 3px solid #B08D3E; 
+            display: flex; align-items: center; justify-content: center; 
+            color: white; font-size: 22px; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .play-btn.playing { animation: pulse-shadow 2s infinite; }
+
+        @keyframes pulse-shadow { 
+            0% { box-shadow: 0 0 0 0 rgba(176, 141, 62, 0.7); } 
+            70% { box-shadow: 0 0 0 12px rgba(176, 141, 62, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(176, 141, 62, 0); } 
+        }
+
+        .btn-green-icon { color: #036306; font-size: 24px; background: none; border: none; }
+
+        .menu-item { 
+            opacity: 0.4; transition: all 0.3s ease; 
+            border-bottom: 2px solid transparent; padding-bottom: 4px; 
+            font-size: 9px; font-weight: bold; text-transform: uppercase;
+        }
+
+        .menu-item.active { opacity: 1; color: #B08D3E; border-bottom: 2px solid #B08D3E; }
+    </style>
 </head>
 <body>
 
@@ -57,7 +93,7 @@
             <h1 class="text-lg tracking-tight">Chemin de la Corniche</h1>
         </header>
 
-        <div class="mx-auto mt-4 w-40 h-40 rounded-2xl bg-[#F0F4F2] flex items-center justify-center shadow-inner overflow-hidden border border-black/5">
+        <div class="mx-auto mt-4 w-40 h-40 rounded-2xl bg-[#F0F4F2] flex items-center justify-center shadow-inner overflow-hidden">
              <img id="album-art" src="logo.png" class="w-full h-full object-cover">
         </div>
 
@@ -78,11 +114,11 @@
             <button class="btn-green-icon" onclick="enviarComando('next')">▶</button>
         </div>
 
-        <div class="mt-4 flex-grow overflow-hidden bg-gray-50" style="border-radius: 30px 30px 0 0; border-top: 1px solid rgba(0,0,0,0.05);">
-             <iframe id="playlist-frame" src="" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+        <div class="mt-4 flex-grow overflow-hidden bg-gray-50" style="border-radius: 30px 30px 0 0; border-top: 1px solid rgba(0,0,0,0.05); position: relative;">
+             <iframe id="playlist-frame" src="" frameborder="0" style="width: 100%; height: 100%; position: absolute; top:0; left:0;"></iframe>
         </div>
 
-        <nav class="p-4 flex justify-around bg-white border-t border-black/5">
+        <nav class="p-4 pb-8 flex justify-around bg-white border-t border-black/5">
              <button id="btn-history" onclick="navegar('ahistory.html', this)" class="menu-item">Chemim-V1</button>
              <button id="btn-radio" onclick="irParaRadio(this)" class="menu-item active">Rádio</button>
              <button id="btn-collection" onclick="navegar('acolection.html', this)" class="menu-item">Sammlung</button>
@@ -100,7 +136,7 @@
 
         function navegar(url, elemento) {
             document.querySelectorAll('.menu-item').forEach(btn => btn.classList.remove('active'));
-            elemento.classList.add('active');
+            if(elemento) elemento.classList.add('active');
             frame.src = url;
         }
 
@@ -108,8 +144,7 @@
             const agora = new Date();
             const dia = String(agora.getDate()).padStart(2, '0');
             const mes = String(agora.getMonth() + 1).padStart(2, '0');
-            const nomeArquivo = `playlist_${dia}_${mes}.html`;
-            navegar(nomeArquivo, elemento);
+            navegar(`playlist_${dia}_${mes}.html`, elemento);
         }
 
         function togglePlay() {
@@ -147,8 +182,6 @@
             const pct = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = pct + "%";
         };
-
-        audio.onended = () => { enviarComando('next'); };
 
         irParaRadio(document.getElementById('btn-radio'));
     </script>
