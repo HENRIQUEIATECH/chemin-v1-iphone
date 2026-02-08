@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+        
+        body { 
+            background: transparent; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 20px;
+        }
+
+        .title { 
+            font-family: 'Playfair Display', serif; 
+            color: #B08D3E; 
+            font-size: 24px; 
+            margin-bottom: 20px;
+        }
+
+        /* Container que organiza os cards em 2 colunas */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+    gap: 15px; /* Espaço entre os cards */
+}
+
+/* Organização interna de cada Card */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Força os itens a ficarem um abaixo do outro */
+    text-align: center;
+    border: 1px solid rgba(176, 141, 62, 0.1);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px; /* Espaço abaixo do título */
+    display: block;
+}
+
+.card-year {
+    font-size: 10px;
+    color: #b08d3e;
+    margin-bottom: 10px; /* Espaço antes do botão */
+    display: block;
+}
+
+.btn-detalhes {
+    margin-top: auto; /* Empurra o botão para o fim do card, caso o título seja longo */
+}
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid rgba(176, 141, 62, 0.1);
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1A3C2F;
+            display: block;
+        }
+
+        .card-year {
+            font-size: 10px;
+            color: #B08D3E;
+            text-transform: uppercase;
+        }
+        .btn-detalhes {
+    display: block;
+    margin-top: 10px;
+    font-size: 10px;
+    color: #b08d3e; /* O Dourado da rádio */
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 1px solid rgba(176, 141, 62, 0.4);
+    padding: 5px 0;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-detalhes:hover {
+    background: #b08d3e;
+    color: white;
+}
+    </style>
+</head>
+<body>
+   <div class="title">Die Sammlung</div>
+    
+<div class="grid">
+    
+    <div class="card">
+        <img src="s-album-01.png" alt="Beethoven">
+        <span class="card-title">Beethoven: Sinfonie</span>
+        <span class="card-year">Klassik</span>
+        <a href="detalhes_beethoven.html" class="btn-detalhes">Mehr erfahren</a>
+    </div>
+
+    <div class="card">
+        <img src="s-album-02.png" alt="Chopin">
+        <span class="card-title">Chopin: Nocturnes</span>
+        <span class="card-year">Romantik</span>
+        <a href="detalhes_chopin.html" class="btn-detalhes">Mehr erfahren</a>
+    </div>
+
+    <div class="card">
+        <img src="s-album-03.png" alt="Mozart">
+        <span class="card-title">Mozart: Requiem</span>
+        <span class="card-year">Barock</span>
+        <a href="detalhes_mozart.html" class="btn-detalhes">Mehr erfahren</a>
+    </div>
+
+    <div class="card">
+        <img src="s-album-04.png" alt="Bach">
+        <span class="card-title">J.S. Bach: Partitas</span>
+        <span class="card-year">Barock</span>
+        <a href="detalhes_bach.html" class="btn-detalhes">Mehr erfahren</a>
+    </div>
+    </div>
+</body>
+</html>
