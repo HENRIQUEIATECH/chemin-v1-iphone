@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Chemin | Die Stimme der Seele</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    
+    <script>
+        function checkDevice() {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (!isMobile) {
+                document.body.innerHTML = `
+                    <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #1a3c2f; color: #b08d3e; text-align: center; padding: 20px; font-family: 'Playfair Display', serif;">
+                        <img src="logo.png" style="width: 150px; margin-bottom: 30px; border: 1px solid #b08d3e; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <h1 style="font-size: 32px; margin-bottom: 10px;">Exklusive Erfahrung</h1>
+                        <p style="font-size: 18px; max-width: 500px; line-height: 1.6; font-style: italic;">
+                            "Radio Chemin ist ein intimes Erlebnis, geschaffen für den Moment in Ihrer Handfläche. <br><br>
+                            Bitte öffnen Sie diesen Link auf Ihrem <b>Smartphone</b>, um die CHEMIM-V1 zu sintonisieren."
+                        </p>
+                        <div style="margin-top: 40px; border-top: 1px solid #b08d3e; width: 100px;"></div>
+                        <p style="font-size: 10px; margin-top: 20px; opacity: 0.6; letter-spacing: 4px; text-transform: uppercase;">IARTIUM SOLUTIONS</p>
+                    </div>
+                `;
+            }
+        }
+        window.addEventListener('DOMContentLoaded', checkDevice);
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lato:wght@300;400&display=swap');
+        body { background-color: #fdfbf7; color: #1a3c2f; font-family: 'Lato', sans-serif; scroll-behavior: smooth; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        .text-gold { color: #b08d3e; }
+        .double-gold-divider {
+            border-top: 2px solid #b08d3e; border-bottom: 1px solid #b08d3e;
+            height: 4px; margin: 60px auto; max-width: 80%; opacity: 0.6;
+        }
+        .btn-shine {
+            position: relative; overflow: hidden; background-color: #b08d3e; color: #1a3c2f;
+            padding: 18px 50px; border-radius: 50px; font-weight: bold; display: inline-block;
+            box-shadow: 0 4px 15px rgba(176, 141, 62, 0.3); transition: 0.3s; cursor: pointer;
+        }
+        .btn-shine::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 4s infinite;
+        }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
+    </style>
+</head>
+<body>
+
+    <header class="bg-[#1a3c2f] text-white py-16 px-6 text-center border-b-[6px] border-[#b08d3e]">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8">
+            <img src="logo.png" alt="CHEMIM Logo" class="w-32 h-32 rounded-xl shadow-2xl border border-[#b08d3e]">
+            <div>
+                <h1 class="text-5xl md:text-7xl mb-2 serif">Chemin de la Corniche</h1>
+                <p class="text-gold italic text-2xl">Radio Chemin — Begleitung für Ihre Seele.</p>
+            </div>
+        </div>
+        
+        <div class="mt-10">
+            <button onclick="openModal()" class="btn-shine text-lg uppercase tracking-[2px]">CHEMIM-V1 Starten</button>
+            <p style="color: #b08d3e; font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; margin-top: 20px;">
+                "Für Ihren Komfort können Sie Radio Chemin jetzt als App für <b>iOS</b> installieren.<br>
+                <span class="text-xs opacity-70">(Android-Version in Kürze verfügbar)</span>"
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-16">
+        <section>
+            <h2 class="text-4xl text-center mb-8 serif">Die Geschichte</h2>
+            <div class="text-lg leading-relaxed text-justify space-y-6 italic opacity-90">
+                <p>An der Corniche ist die Zeit ein Fluss, der ruhig durch das Tal fließt. Jeder Stein ein alter Vers, jeder Blick ein neuer Morgen, der zählt...</p>
+            </div>
+        </section>
+        
+        <div class="double-gold-divider"></div>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 py-10 text-center">
+            <div><h3 class="text-gold text-2xl mb-3 serif">Mission</h3><p class="text-sm">Einsamkeit heilen durch die universelle Sprache der Musik.</p></div>
+            <div class="border-x border-[#b08d3e]/30">
+                <h3 class="text-gold text-2xl mb-3 serif">Vision</h3><p class="text-sm">Der exklusivste digitale Balkon für Kontemplation.</p>
+            </div>
+            <div><h3 class="text-gold text-2xl mb-3 serif">Werte</h3><p class="text-sm">Empathie, klassische Exzellenz und Stille.</p></div>
+        </section>
+
+        <div class="double-gold-divider"></div>
+    </main>
+
+    <section class="relative py-32 bg-fixed bg-cover bg-center text-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('seu-fundo.png');">
+        <h2 class="text-4xl md:text-5xl serif italic px-4 leading-tight">
+            "Musik bricht alle Barrieren. <br>
+            <span class="text-gold">Radio Chemin ist Ihre Heimat</span>, <br>wenn die Welt zu leise wird."
+        </h2>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-6 py-20 text-center">
+        <h3 class="text-2xl mb-6 serif">Hören Sie unsere Vision</h3>
+        <audio controls class="mx-auto mb-16 shadow-xl w-full max-w-md"><source src="audio.mp3"></audio>
+        
+        <div class="double-gold-divider"></div>
+        
+        <h3 class="text-2xl mb-6 serif">Ein visueller Einblick</h3>
+        <div class="aspect-video rounded-lg border-2 border-[#b08d3e] overflow-hidden shadow-2xl">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/SEU_ID_VIDEO"></iframe>
+        </div>
+    </section>
+
+    <div id="installModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
+        <div class="bg-[#fdfbf7] max-w-md w-full rounded-2xl shadow-2xl border-2 border-[#b08d3e] overflow-hidden">
+            <div class="bg-[#1a3c2f] p-6 text-center text-white border-b border-[#b08d3e]">
+                <img src="logo.png" class="w-20 h-20 mx-auto rounded-lg mb-4 border border-[#b08d3e]">
+                <h3 class="text-gold text-xl serif">Radio Chemin installieren</h3>
+            </div>
+            <div class="p-8 space-y-6">
+                <p class="text-sm">1. Tippen Sie im <b>Safari</b> auf das <b>Teilen-Symbol</b> (Quadrat com Pfeil).</p>
+                <p class="text-sm">2. Wählen Sie <b>'Zum Home-Bildschirm hinzufügen'</b>.</p>
+                <p class="text-sm">3. Tippen Sie auf <b>'Hinzufügen'</b> oben rechts.</p>
+                <button onclick="window.location.href='playlist_rba.html'" class="w-full bg-[#1a3c2f] text-gold py-3 rounded-lg font-bold mt-4 tracking-widest uppercase text-xs">Zum Player weiterleiten</button>
+                <button onclick="closeModal()" class="w-full text-xs text-gray-400 underline uppercase mt-4">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-[#1a3c2f] text-white py-20 px-6 mt-20">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10">
+            <img src="paulo.jpg" class="w-48 h-48 object-cover border-4 border-[#b08d3e] rounded-sm shadow-2xl">
+            <div class="flex-1">
+                <h3 class="text-3xl serif text-gold">Paulo do Porto</h3>
+                <p class="italic mb-2 opacity-80">Schriftsteller & Intellektueller</p>
+                <p class="text-sm opacity-70 leading-relaxed mb-6">
+                    Akademische Forschung in Theologie (Harvard edX). Mit der <b>CHEMIM-V1</b> Plattform verbinden wir Kunst und Technologie für das menschliche Wohlbefinden.
+                </p>
+                <a href="#" class="text-gold font-bold underline">Mein Buch lesen →</a>
+            </div>
+        </div>
+        <p class="text-center mt-20 text-[10px] tracking-[6px] opacity-30">IARTIUM SOLUTIONS | CHEMIM-V1 | LUXEMBURG 2026</p>
+    </footer>
+
+    <script>
+        function openModal() { document.getElementById('installModal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        function closeModal() { document.getElementById('installModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        window.onclick = function(e) { if (e.target == document.getElementById('installModal')) closeModal(); }
+    </script>
+</body>
+</html>
