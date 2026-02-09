@@ -1,5 +1,5 @@
 {
-  "short_name": "Corniche",
+  "short_name": "Chemin",
   "name": "Chemin de la Corniche",
   "description": "Cultura e música clássica na Corniche.",
   "icons": [
@@ -16,7 +16,7 @@
       "purpose": "any"
     }
   ],
-  "start_url": "chemin-v1-a234e6789-55.html",
+  "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#1A3C2F",
   "background_color": "#1A3C2F"
