@@ -1,7 +1,7 @@
 {
   "name": "Chemin de la Corniche",
   "short_name": "Chemin",  
-  "start_url": "http://iartium.com/chemin-v1-iphone/chemin-v1-a234e6789-66.html",
+"start_url": "./chemin-v1-a234e6789-66.html",
   "description": "Cultura e música clássica na Corniche.",
   "icons": [
     {
