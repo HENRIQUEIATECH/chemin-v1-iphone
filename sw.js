@@ -1,6 +1,6 @@
 const cacheName = 'corniche-v1';
 const offlinePage = './offline.html'; // Crie este arquivo!
-const assets = ['./', './index.html', offlinePage, './css/style.css'];
+const assets = ['./', './chemin-v1-a234e6789-66.html',', offlinePage, './css/style.css'];
 
 // No Install: Adicione a página offline ao cache
 self.addEventListener('install', e => {
