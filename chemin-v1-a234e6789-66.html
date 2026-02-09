@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Chemin de la Corniche | CHEMIM-V1</title>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chemin">
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto+Mono:wght@400&display=swap');
+        
+        body { 
+            background: #F8FAF9; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh; 
+            -webkit-font-smoothing: antialiased; 
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Evita scrolls indesejados no corpo do app */
+        }
+
+        .phone-container {
+            width: 100%; 
+            max-width: 500px; /* Largura ideal para manter a elegância no notebook */
+            height: 100vh; 
+            background: #FFFFFF;
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+        }
+
+        header { 
+            background: linear-gradient(180deg, #F0F4F2 0%, #FFFFFF 100%); 
+            padding-top: env(safe-area-inset-top, 20px); 
+            height: calc(90px + env(safe-area-inset-top, 0px)); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px; 
+            border-bottom: 1px solid rgba(176, 141, 62, 0.15);
+        }
+
+        header h1 {
+            color: #1A3C2F;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* CONTROLES DO PLAYER ROBUSTO */
+        .play-btn { 
+            width: 75px; height: 75px; 
+            background: #036306; 
+            border-radius: 50%; 
+            border: 3px solid #B08D3E; 
+            display: flex; align-items: center; justify-content: center; 
+            color: white; font-size: 24px; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(3, 99, 6, 0.2);
+        }
+
+        .play-btn.playing { animation: pulse-shadow 2s infinite; }
+
+        @keyframes pulse-shadow { 
+            0% { box-shadow: 0 0 0 0 rgba(176, 141, 62, 0.7); } 
+            70% { box-shadow: 0 0 0 15px rgba(176, 141, 62, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(176, 141, 62, 0); } 
+        }
+
+        .btn-green-icon { color: #036306; font-size: 28px; background: none; border: none; cursor: pointer; }
+
+        .menu-item { 
+            opacity: 0.4; transition: all 0.3s ease; 
+            border-bottom: 2px solid transparent; padding-bottom: 4px; 
+            font-size: 9px; font-weight: bold; text-transform: uppercase;
+            letter-spacing: 0.1em; background: none; border-top: none;
+        }
+
+        .menu-item.active { opacity: 1; color: #B08D3E; border-bottom: 2px solid #B08D3E; }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <header>
+            <img src="logo.png" alt="Logo" class="w-8 h-8 rounded border border-[#B08D3E]/30">
+            <h1 class="text-lg tracking-tight">Chemin de la Corniche</h1>
+        </header>
+
+        <div class="mx-auto mt-6 w-44 h-44 rounded-2xl bg-[#F0F4F2] flex items-center justify-center shadow-inner overflow-hidden border border-black/5">
+             <img id="album-art" src="logo.png" class="w-full h-full object-cover">
+        </div>
+
+        <div class="px-8 mt-4 text-center">
+            <h2 id="musica-atual" class="text-md font-bold truncate text-[#1A3C2F]">Willkommen</h2>
+            <p id="artista-atual" class="text-[10px] text-[#B08D3E] font-mono uppercase tracking-widest mt-1">Sintonisatort...</p>
+        </div>
+
+        <div class="w-2/3 h-1 bg-gray-100 mx-auto mt-4 rounded-full overflow-hidden">
+            <div id="progress-bar" class="w-0 h-full bg-[#036306] transition-all"></div>
+        </div>
+
+        <div class="flex justify-around items-center px-12 mt-4">
+            <button class="btn-green-icon" onclick="enviarComando('prev')">◀</button>
+            <button id="play-button" class="play-btn" onclick="togglePlay()">
+                <span id="play-icon">▶</span>
+            </button>
+            <button class="btn-green-icon" onclick="enviarComando('next')">▶</button>
+        </div>
+
+        <div class="mt-6 flex-grow overflow-hidden bg-gray-50" style="border-radius: 30px 30px 0 0; border-top: 1px solid rgba(0,0,0,0.05); position: relative;">
+             <iframe id="playlist-frame" src="" frameborder="0" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></iframe>
+        </div>
+
+        <nav class="p-5 pb-10 flex justify-around bg-white border-t border-black/5">
+             <button id="btn-history" onclick="navegar('ahistory.html', this)" class="menu-item">Chemim-V1</button>
+             <button id="btn-radio" onclick="irParaRadio(this)" class="menu-item active">Rádio</button>
+             <button id="btn-collection" onclick="navegar('acolection.html', this)" class="menu-item">Sammlung</button>
+        </nav>
+    </div>
+
+    <audio id="main-audio"></audio>
+
+<script>
+        const audio = document.getElementById('main-audio');
+        const playBtn = document.getElementById('play-button');
+        const playIcon = document.getElementById('play-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const frame = document.getElementById('playlist-frame');
+
+        function navegar(url, elemento) {
+            document.querySelectorAll('.menu-item').forEach(btn => btn.classList.remove('active'));
+            elemento.classList.add('active');
+            frame.src = url;
+        }
+
+        function irParaRadio(elemento) {
+            const agora = new Date();
+            const dia = String(agora.getDate()).padStart(2, '0');
+            const mes = String(agora.getMonth() + 1).padStart(2, '0');
+            const nomeArquivo = `playlist_${dia}_${mes}.html`;
+            navegar(nomeArquivo, elemento);
+        }
+
+ if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker registrado!', reg))
+                .catch(err => console.log('Erro ao registrar SW', err));
+        });
+    }
+
+        function togglePlay() {
+            if (audio.src) {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.innerText = "||";
+                    playBtn.classList.add('playing');
+                } else {
+                    audio.pause();
+                    playIcon.innerText = "▶";
+                    playBtn.classList.remove('playing');
+                }
+            }
+        }
+
+        window.addEventListener('message', function(event) {
+            const data = event.data;
+            if (data.tipo === 'tocar') {
+                audio.src = data.url;
+                document.getElementById('musica-atual').innerText = data.nome;
+                document.getElementById('artista-atual').innerText = data.artista;
+                if(data.capa) document.getElementById('album-art').src = data.capa;
+                audio.play();
+                playIcon.innerText = "||";
+                playBtn.classList.add('playing');
+            }
+        });
+
+        function enviarComando(cmd) {
+            frame.contentWindow.postMessage(cmd, '*');
+        }
+
+        audio.ontimeupdate = () => {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = pct + "%";
+        };
+
+        audio.onended = () => { enviarComando('next'); };
+
+        irParaRadio(document.getElementById('btn-radio'));
+    </script>
+</body>
+</html>
